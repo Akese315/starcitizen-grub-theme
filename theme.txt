@@ -1,0 +1,65 @@
+# =====================================================================
+# Theme GRUB "Holo Select" - liste de texte avec contour hologramme
+#
+# Arborescence attendue (celle du depot GRUB-THEME) :
+#   /boot/grub/themes/scifi/theme.txt
+#   /boot/grub/themes/scifi/background/background.jpg
+#   /boot/grub/themes/scifi/buttons/item_*.png     (contour au repos)
+#   /boot/grub/themes/scifi/buttons/select_*.png   (contour de l'entree selectionnee)
+#
+# Dans /etc/default/grub :
+#   GRUB_THEME="/boot/grub/themes/scifi/theme.txt"
+# puis : sudo grub-mkconfig -o /boot/grub/grub.cfg
+# =====================================================================
+
+# ---- Global ----
+desktop-image: "background/background.jpg"
+desktop-image-scale-method: "crop"
+desktop-image-h-align: "center"
+desktop-image-v-align: "center"
+desktop-color: "#05070a"
+
+title-text: ""
+
++ label {
+    left = 5%
+    top = 6%
+    width = 60%
+    align = "left"
+    text = "SYSTEM SELECT"
+    font = "DejaVu Sans Bold 24"
+    color = "#d8f6ff"
+}
+
+# ---- Liste des OS : texte seul, contour hologramme sur chaque entree ----
++ boot_menu {
+    left = 5%
+    top = 20%
+    width = 40%
+    height = 60%
+
+    item_height = 44
+    item_spacing = 16
+    item_padding = 14
+
+    item_font = "DejaVu Sans Regular 15"
+    item_color = "#8fd8e8"
+    selected_item_font = "DejaVu Sans Bold 15"
+    selected_item_color = "#eafcff"
+
+    item_pixmap_style = "buttons/item_*.png"
+    selected_item_pixmap_style = "buttons/select_*.png"
+
+    scrollbar = false
+}
+
+# ---- Decompte avant boot automatique ----
++ label {
+    id = "__timeout__"
+    left = 5%
+    top = 84%
+    width = 40%
+    align = "left"
+    font = "DejaVu Sans Regular 12"
+    color = "#5f97a8"
+}
