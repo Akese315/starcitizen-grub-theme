@@ -12,8 +12,16 @@
 # puis : sudo grub-mkconfig -o /boot/grub/grub.cfg
 # =====================================================================
 
+# IMPORTANT : utilise du PNG pour le fond d'ecran, pas du JPEG.
+# Le module jpeg.mod n'est pas toujours inclus dans les images GRUB, et
+# meme quand il l'est, GRUB ne sait lire que le JPEG "baseline" (pas le
+# JPEG progressif que produisent beaucoup d'exports/telephones). Ca donne
+# l'erreur "n'est pas d'un format pris en charge" au boot. PNG evite ce
+# probleme (module quasi toujours present, pas de variante progressive).
+# Convertis avec : convert background.jpg background.png
+
 # ---- Global ----
-desktop-image: "background/background.jpg"
+desktop-image: "background/background.png"
 desktop-image-scale-method: "crop"
 desktop-image-h-align: "center"
 desktop-image-v-align: "center"

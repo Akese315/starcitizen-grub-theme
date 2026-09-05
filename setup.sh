@@ -80,9 +80,16 @@ for sub in background buttons; do
     fi
 done
 
-if [ ! -e "$DEST_DIR/background/background.jpg" ]; then
-    echo "Attention : $DEST_DIR/background/background.jpg introuvable." >&2
-    echo "theme.txt s'attend precisement a ce nom pour le fond d'ecran." >&2
+if [ ! -e "$DEST_DIR/background/background.png" ]; then
+    if [ -e "$DEST_DIR/background/background.jpg" ] || [ -e "$DEST_DIR/background/background.jpeg" ]; then
+        echo "Attention : theme.txt attend background/background.png, mais seul un" >&2
+        echo ".jpg/.jpeg a ete trouve. GRUB refuse souvent les JPEG au boot" >&2
+        echo "(module absent ou JPEG progressif). Convertis-le :" >&2
+        echo "  convert $SRC_DIR/background/background.jpg $SRC_DIR/background/background.png" >&2
+        echo "puis relance ce script." >&2
+    else
+        echo "Attention : $DEST_DIR/background/background.png introuvable." >&2
+    fi
 fi
 
 # --- 6. Mettre a jour /etc/default/grub ---
